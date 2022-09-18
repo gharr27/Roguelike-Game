@@ -118,11 +118,12 @@ public class BoardManager : MonoBehaviour
                 }
                 else if (lines[i][j] == 'E')    //Enemy
                 {
-                    
+                    GameObject enemy = enemyTiles[Random.Range(0, enemyTiles.Length)];
+                    Instantiate(enemy, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
                 }
                 else if (lines[i][j] == 'T')    //Exit
                 {
-                    
+                    Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F), Quaternion.identity);
                 }
             }
         }
