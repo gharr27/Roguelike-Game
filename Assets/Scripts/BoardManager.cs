@@ -88,6 +88,7 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene(int level)
     {
+        bool isWin = false;
         BoardSetup();
         //InitializeList();
         //LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
@@ -97,33 +98,49 @@ public class BoardManager : MonoBehaviour
         //Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F), Quaternion.identity);
 
         //Assets/Resources/day1.txt
-        TextAsset levelAsset = Resources.Load("day1") as TextAsset;
-
-        var lines = levelAsset.text.Split('\n');
-
-        for (int i = 0; i < lines.Length; i++)
+        TextAsset levelAsset = null;
+        if (level == 1)
         {
-            for (int j = 0; j < lines[i].Length; j++)
+            levelAsset = Resources.Load("day1") as TextAsset;
+        }
+        else if (level == 2)
+        {
+            levelAsset = Resources.Load("day2") as TextAsset;
+        }
+        else if (level == 3)
+        {
+            levelAsset = Resources.Load("day3") as TextAsset;
+        }
+        else
+        {
+            isWin = true;
+        }
+
+        if (!isWin)
+        {
+            var lines = levelAsset.text.Split('\n');
+
+            for (int i = 0; i < lines.Length; i++)
             {
-                if (lines[i][j] == 'X') //Wall
+                for (int j = 0; j < lines[i].Length; j++)
                 {
-                    GameObject wall = wallTiles[Random.Range(0, wallTiles.Length)];
-                    //i - 1 needs to be inverted
-                    Instantiate(wall, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
-                }
-                else if (lines[i][j] == 'F')    //Food
-                {
-                    GameObject food = foodTiles[Random.Range(0, foodTiles.Length)];
-                    Instantiate(food, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
-                }
-                else if (lines[i][j] == 'E')    //Enemy
-                {
-                    GameObject enemy = enemyTiles[Random.Range(0, enemyTiles.Length)];
-                    Instantiate(enemy, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
-                }
-                else if (lines[i][j] == 'T')    //Exit
-                {
-                    Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F), Quaternion.identity);
+                    if (lines[i][j] == 'X') //Wall
+                    {
+                        GameObject wall = wallTiles[Random.Range(0, wallTiles.Length)];
+                        //i - 1 needs to be inverted
+                        Instantiate(wall, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
+                    } else if (lines[i][j] == 'F')    //Food
+                    {
+                        GameObject food = foodTiles[Random.Range(0, foodTiles.Length)];
+                        Instantiate(food, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
+                    } else if (lines[i][j] == 'E')    //Enemy
+                    {
+                        GameObject enemy = enemyTiles[Random.Range(0, enemyTiles.Length)];
+                        Instantiate(enemy, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
+                    } else if (lines[i][j] == 'T')    //Exit
+                    {
+                        Instantiate(exit, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
+                    }
                 }
             }
         }

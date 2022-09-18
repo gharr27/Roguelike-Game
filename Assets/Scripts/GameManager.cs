@@ -43,16 +43,27 @@ public class GameManager : MonoBehaviour
 
     void InitGame()
     {
-        doingSetup = true;
+        if (level < 4)
+        {
+            doingSetup = true;
 
-        levelImage = GameObject.Find("LevelImage");
-        levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        levelText.text = "Day " + level;
-        levelImage.SetActive(true);
-        Invoke("HideLevelImage", levelStartDelay);
+            levelImage = GameObject.Find("LevelImage");
+            levelText = GameObject.Find("LevelText").GetComponent<Text>();
+            levelText.text = "Day " + level;
+            levelImage.SetActive(true);
+            Invoke("HideLevelImage", levelStartDelay);
 
-        enemies.Clear();
-        boardScript.SetupScene(level);
+            enemies.Clear();
+            boardScript.SetupScene(level);
+        }
+        else
+        {
+            levelImage = GameObject.Find("LevelImage");
+            levelText = GameObject.Find("LevelText").GetComponent<Text>();
+            levelText.text = "You win!";
+            levelImage.SetActive(true);
+
+        }
     }
 
     private void HideLevelImage()
