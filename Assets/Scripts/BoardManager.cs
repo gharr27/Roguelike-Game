@@ -88,7 +88,7 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene(int level)
     {
-        //BoardSetup();
+        BoardSetup();
         //InitializeList();
         //LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
         //LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
@@ -105,23 +105,24 @@ public class BoardManager : MonoBehaviour
         {
             for (int j = 0; j < lines[i].Length; j++)
             {
-                if (lines[i][j] == 'X')
+                if (lines[i][j] == 'X') //Wall
                 {
                     GameObject wall = wallTiles[Random.Range(0, wallTiles.Length)];
                     //i - 1 needs to be inverted
                     Instantiate(wall, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
                 }
-                else if (lines[i][j] == 'F')
+                else if (lines[i][j] == 'F')    //Food
                 {
-                    //Food
+                    GameObject food = foodTiles[Random.Range(0, foodTiles.Length)];
+                    Instantiate(food, new Vector3(j - 1, 8 - i, 0F), Quaternion.identity);
                 }
-                else if (lines[i][j] == 'E')
+                else if (lines[i][j] == 'E')    //Enemy
                 {
-                    //Enemy
+                    
                 }
-                else if (lines[i][j] == 'T')
+                else if (lines[i][j] == 'T')    //Exit
                 {
-                    //Exit
+                    
                 }
             }
         }
