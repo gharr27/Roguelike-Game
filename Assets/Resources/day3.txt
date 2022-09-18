@@ -3,8 +3,8 @@ X  E   F X
 X   XXXX X
 X   XT   X
 X F XXXXXX
-X   X   FX
-X   E    X
+X E X   FX
+X    E   X
 XXXXXX   X
 X       FX
 XXXXXXXXXX
